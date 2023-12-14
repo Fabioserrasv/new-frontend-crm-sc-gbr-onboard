@@ -1,0 +1,37 @@
+<div class="banner-image">
+  <div>
+    <span>Espaço do Médico</span>
+  </div>
+</div>
+
+<div class="content">
+  <div class="login-div">
+    <form action="">
+      <app-input id="email" inputType="email" name="E-mail"></app-input>
+
+      <app-input id="senha" inputType="password" name="Senha"></app-input>
+
+      <div class="lembrar-div">
+        <input type="checkbox">
+        <span>Lembrar neste dispositivo</span>
+      </div>
+
+      <div class="bottom-login">
+        <app-button name="Entrar"></app-button>
+        <a href="">Recuperar senha</a>
+      </div>
+    </form>
+    <div class="break">
+      <div class="line"></div>
+      <span>OU</span>
+    </div>
+    <div class="other-div">
+      <app-button [customStyles]="{'background-color':'#09B37A', 'width': '100%', 'margin-top': '25px'}"
+        name="Entrar com certificado digital" />
+      <div class="msg">
+        <span>Não tem cadastro?</span>
+        <a href="">Cadastre-se</a>
+      </div>
+    </div>
+  </div>
+</div>
