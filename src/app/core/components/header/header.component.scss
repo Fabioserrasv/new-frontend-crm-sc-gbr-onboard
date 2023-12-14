@@ -12,17 +12,16 @@ header {
     height: 40px;
 
     background: #078057;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 
     span {
-      position: absolute;
-      right: 0;
-
-      margin: 10px;
-
       font-family: 'Nunito';
+      margin-right: 20px;
       font-style: normal;
       font-weight: 400;
-      font-size: 12px;
+      font-size: 15px;
       line-height: 16px;
 
       color: #FFFFFF;
@@ -36,12 +35,36 @@ header {
     height: 70px;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
 
     img {
       width: 180px;
       height: 36px;
+    }
+
+    .user-div {
+      margin-right: 40px;
+      display: flex;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+
+        span:first-child {
+          font-size: 20px;
+          font-weight: bold;
+          text-align: end;
+        }
+
+        span:nth-child(2) {
+          font-size: 16px;
+          font-weight: 400;
+          text-align: end;
+        }
+      }
+
+      svg {
+        margin-left: 20px;
+      }
     }
   }
 }

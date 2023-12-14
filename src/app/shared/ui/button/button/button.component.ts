@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, ViewChild } from '@angular/core';
+type ButtonType = "button" | "menu" | "reset" | "submit"
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
@@ -7,9 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() name: string = "";
+  @Input() type: ButtonType = "button";
   @Input() customStyles: any = {};
+  @Input() svgLogin: boolean = false
 
-  onClick() {
-    console.log("clicou")
-  }
 }

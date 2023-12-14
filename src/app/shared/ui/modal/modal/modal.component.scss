@@ -1,0 +1,101 @@
+.modal {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, .5);
+
+  .modal-container {
+    width: 400;
+    height: 270px;
+
+    background-color: #fff;
+
+    &.sm {
+      width: 600px;
+      height: 375px;
+    }
+
+    &.md {
+      width: 740px;
+      height: 670px;
+    }
+
+    &.lg {
+      width: 70%;
+      height: 700px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      position: relative;
+
+      h1 {
+        font-size: 36px;
+      }
+
+      svg {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        cursor: pointer;
+      }
+    }
+
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+
+  }
+
+  .body {
+    flex: 65%;
+    display: flex;
+    padding: 2.5rem;
+    height: 100%;
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+
+      .first-row-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          margin-top: 10px;
+          font-size: 15px;
+          color: #333333;
+        }
+      }
+
+      .botoes {
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+
+  gap: 20px;
+}

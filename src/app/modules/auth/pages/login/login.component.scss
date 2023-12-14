@@ -96,14 +96,15 @@
         justify-content: space-between;
         width: 100%;
 
-        a:any-link {
+        span {
           text-decoration: none;
           color: #4D4D4D;
           font-family: Nunito;
-          font-size: 15px;
+          font-size: 17px;
           font-style: normal;
           font-weight: 400;
           line-height: normal;
+          cursor: pointer;
         }
       }
     }
@@ -141,9 +142,11 @@
         font-weight: 400;
         line-height: normal;
 
-        a:any-link {
+        .link-span {
           text-decoration: none;
           color: #0296FF;
+
+          cursor: pointer;
         }
       }
     }
