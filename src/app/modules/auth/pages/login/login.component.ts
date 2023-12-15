@@ -4,6 +4,7 @@ import { RegisterModalComponent } from '../../components/register-modal/register
 import { ForgetPassModalComponent } from '../../components/forget-pass-modal/forget-pass-modal.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ROUTES } from '../../../../shared/utils/routes';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,6 @@ export class LoginComponent {
 
   login() {
     // if (this.loginForm.invalid) return;
-    this._router.navigateByUrl("/finance/home")
+    this._router.navigateByUrl(ROUTES.FINANCE.HOME)
   }
 }
