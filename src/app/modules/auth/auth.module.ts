@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CrmApiService } from './services/crm-api.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { AuthService } from './services/auth.service';
+import { AlertModule } from '@ui/alert/alert.module';
+import { DataSharingService } from '../../core/services/data-share.service';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,17 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     InputModule,
     ButtonModule,
     ModalModule,
+    AlertModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     NgxMaskDirective,
     NgxMaskPipe
   ],
-  providers: [CrmApiService, provideNgxMask(),]
+  providers: [
+    CrmApiService,
+    AuthService,
+    provideNgxMask(),
+  ]
 })
 export class AuthModule { }

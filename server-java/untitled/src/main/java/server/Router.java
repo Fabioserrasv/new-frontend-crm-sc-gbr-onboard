@@ -33,6 +33,16 @@ public class Router {
   }
 
   public void handle(HttpExchange exchange) throws IOException {
+    exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+    exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "*");
+    exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "*");
+    exchange.getResponseHeaders().add("Access-Control-Allow-Credentials", "true");
+
+    if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+      exchange.sendResponseHeaders(200, -1);
+      return;
+    }
+
     String path = exchange.getRequestURI().getPath();
     String method = exchange.getRequestMethod();
 

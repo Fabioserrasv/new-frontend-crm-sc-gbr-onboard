@@ -29,14 +29,18 @@ public class UserController extends BaseController {
   }
 
   public void createUser(HttpExchange exchange) throws IOException {
-    InputStream requestBody = exchange.getRequestBody();
+    try{
+      InputStream requestBody = exchange.getRequestBody();
 
-    InputStreamReader reader = new InputStreamReader(requestBody);
-    User newUser = this.gson.fromJson(reader, User.class);
+      InputStreamReader reader = new InputStreamReader(requestBody);
+      User newUser = this.gson.fromJson(reader, User.class);
 
-    userService.createUser(newUser);
+      userService.createUser(newUser);
 
-    sendResponse(exchange, "{\"message\": \"ok.\"}");
+      sendResponse(exchange, "{\"message\": \"ok.\"}");
+    }catch (Exception e){
+      System.out.println(e.getMessage());
+    }
   }
 
   /*public void getUserById(HttpExchange exchange, int userId) throws IOException {

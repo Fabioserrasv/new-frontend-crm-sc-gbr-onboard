@@ -26,7 +26,7 @@ public class HttpServerApp {
 
     router.addRoute("/auth/login", "POST", authController::login, false);
     router.addRoute("/users", "GET", userController::getAllUsers, true);
-    router.addRoute("/users/create", "POST", userController::createUser, true);
+    router.addRoute("/users/create", "POST", userController::createUser, false);
 
     server.createContext("/", router::handle);
 

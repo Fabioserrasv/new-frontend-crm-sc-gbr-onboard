@@ -37,7 +37,10 @@ public class AuthController extends BaseController {
         tokenExpiration.add(Calendar.HOUR_OF_DAY, 3);
 
         String jwt = this.jwtController.generateToken(user, tokenExpiration.getTime());
-        sendResponseWithJwtToken(exchange, this.gson.toJson(user), jwt);
+
+        String resp = this.gson.toJson(user);
+        resp = resp.replace("}", ",\n\"token\": \""+jwt+"\"}");
+        sendResponseWithJwtToken(exchange, resp, jwt);
       }
     }catch (Exception e){
       System.out.println(e.getMessage());

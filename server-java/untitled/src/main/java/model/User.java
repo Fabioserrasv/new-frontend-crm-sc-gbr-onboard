@@ -69,4 +69,17 @@ public class User {
   public void setDataNascimento(String dataNascimento) {
     this.dataNascimento = dataNascimento;
   }
+
+  @Override
+  public String toString() {
+    return "User{" +
+      "id=" + id +
+      ", nome='" + nome + '\'' +
+      ", cpf='" + cpf + '\'' +
+      ", crm='" + crm + '\'' +
+      ", email='" + email + '\'' +
+      ", senha='" + senha + '\'' +
+      ", dataNascimento='" + dataNascimento + '\'' +
+      '}';
+  }
 }

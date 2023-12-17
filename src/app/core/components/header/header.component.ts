@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { User } from '../../entities/User';
+import { getUserFromToken } from '../../../shared/utils/utils';
+import { Router } from '@angular/router';
+import { DataSharingService } from '../../services/data-share.service';
 
 @Component({
   selector: 'app-header',
@@ -21,9 +25,36 @@ export class HeaderComponent {
     "border-bottom": "2px solid #808080"
   }
 
-  @Input() signed: boolean = false
+  public signed: boolean = false
 
-  public username = "Dr. Otacílo Marcondes Pedrosa";
-  public crm = "CRM-SC 100292";
+  public username = "undefined";
+  public crm = "undefined";
+  private user: User
+
+  constructor(private router: Router, private dataSharingService: DataSharingService) {
+    this.dataSharingService.signed.subscribe(value => {
+      this.signed = value;
+
+      if (this.signed) {
+        const token = localStorage.getItem("jwtToken");
+
+        if (token) {
+          this.user = getUserFromToken(token);
+          this.username = this.user.nome;
+          this.crm = this.user.crm;
+        }
+      }
+    });
+  }
+
+  ngOnInit() {
+    const token = localStorage.getItem("jwtToken");
+
+    if (token) {
+      this.dataSharingService.signed.next(true);
+    } else {
+      this.dataSharingService.signed.next(false);
+    }
+  }
 
 }

@@ -2,6 +2,20 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '@ui/modal/modal/modal.component';
 import { CRMResponse, CrmApiService } from '../../services/crm-api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { AlertComponent } from '@ui/alert/alert/alert.component';
+
+export type RegisterForm = {
+  temcrm: string | null;
+  crm: string | null;
+  nome: string | null;
+  cpf: string | null;
+  nascimento: string | null;
+  email: string | null;
+  confirma_email: string | null;
+  senha: string | null;
+  resenha: string | null;
+}
 
 @Component({
   selector: 'app-register-modal',
@@ -11,6 +25,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegisterModalComponent {
   @Input() isOpen: boolean = false;
   @ViewChild(ModalComponent) modal: any;
+
+  private alert: any
+
   public info: CRMResponse = {
     crm: 0,
     dsUf: "",
@@ -39,14 +56,11 @@ export class RegisterModalComponent {
     resenha: new FormControl('', [Validators.required,]),
   })
 
-  constructor(private crmApiService: CrmApiService) {
-    this.registerForm.valueChanges.subscribe((value) => {
-      console.log(value)
-    })
-  }
+  constructor(private crmApiService: CrmApiService, private authService: AuthService) { }
 
-  openModal() {
+  openModal(alertComponent?: any) {
     this.modal.isOpen = true;
+    this.alert = alertComponent || null;
   }
 
   closeModal() {
@@ -81,8 +95,19 @@ export class RegisterModalComponent {
     return '000.000.000-009';
   }
 
-  register() {
-    if (this.registerForm.invalid) return;
+  async register() {
+    if (this.registerForm.invalid) {
+      this.alert.alert("Preencha os campos obrigatórios", "danger");
+      return;
+    }
+
+    if (await this.authService.register(this.registerForm.value as RegisterForm)) {
+      this.alert.alert("Cadastro realizado com sucesso", "success");
+
+      this.closeModal();
+    } else {
+      this.alert.alert("Erro ao inserir o cadastro.", "warning");
+    }
 
   }
 }
