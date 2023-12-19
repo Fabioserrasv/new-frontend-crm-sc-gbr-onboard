@@ -3,12 +3,28 @@ button {
   min-height: 50px;
   padding: 10px;
   border-radius: 45px;
-  background-color: #0296FF;
   border: none;
+
+  transition: .2s;
 
   cursor: pointer;
 
-  color: #FFF;
+  &.normal {
+    background-color: #0296FF;
+    color: #FFF;
+  }
+
+  &.decline {
+    background-color: #fff;
+    color: #E24534;
+    border: 2px solid #E24534;
+
+    &:hover {
+      background-color: #E24534;
+      color: #fff;
+    }
+  }
+
   font-family: Nunito;
   font-size: 19px;
   font-style: normal;

@@ -17,6 +17,35 @@
   width: 100%;
   position: relative;
 
+
+
+  label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: white;
+    padding: 0 5px;
+    font-size: 17px;
+    z-index: 2;
+    border-radius: 5px;
+
+    border: 1px solid #ccc;
+
+    &.label-required {
+      &::after {
+        content: " *";
+        color: red;
+      }
+    }
+  }
+
+  &:has(input:disabled) {
+    label {
+      background-color: #e9ecef !important;
+      opacity: 1;
+    }
+  }
+
   input:not(input[type='radio']) {
     width: 100%;
     padding: 15px;
@@ -28,20 +57,22 @@
 
     font-size: 15px;
 
+    transition: .3s;
+
     &:focus {
       outline: none;
       border-color: #0296FF;
     }
-  }
 
-  label {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background-color: white;
-    padding: 0 5px;
-    font-size: 17px;
-    z-index: 2;
+    &:disabled,
+    &:read-only {
+      background-color: #e9ecef !important;
+      opacity: 1;
+    }
+
+    &.needed {
+      border: 1px solid #E24534;
+    }
   }
 
   svg {

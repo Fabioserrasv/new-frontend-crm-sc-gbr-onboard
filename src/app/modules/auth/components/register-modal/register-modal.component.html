@@ -1,26 +1,28 @@
 <app-modal title="Cadastro" size="md">
-  <form [formGroup]="registerForm" #modalBody (submit)="register()">
+  <form [formGroup]="registerForm" #modalBody (ngSubmit)="register()">
     <div class="first-row-div">
       <div class="row">
         <div class="input-group temcrm-group" style="width: 100%;">
-          <label>Possui CRM em SC?</label>
+          <label class="label-required">Possui CRM em SC?</label>
 
           <div class="radio-group">
+            <input id="simcrm" formControlName="temcrm" type="radio" name="temcrm" value="sim"
+              (change)="checkInputsDisponobility()">
             <span>Sim</span>
-            <input id="simcrm" formControlName="temcrm" type="radio" name="temcrm" value="sim">
 
+            <input (change)="checkInputsDisponobility()" id="naocrm" formControlName="temcrm" type="radio" name="temcrm"
+              value="nao">
             <span>Não</span>
-            <input id="naocrm" formControlName="temcrm" type="radio" name="temcrm" value="nao">
           </div>
         </div>
         <!-- <app-input style="width: 100%;" id="temcrm" inputType="text" placeholder="Possui CRM em SC?" /> -->
 
         <div class="input-group crm-search" style="width: 100%;">
-          <label>CRM</label>
-          <input mask="0000" id="crm" formControlName="crm" type="text">
+          <label class="label-required">CRM</label>
+          <input mask="0000" id="crm" formControlName="crm" type="text" [readonly]="readonlys.crm">
 
-          <svg (click)="onSearchCRM(this.registerForm.value['crm'] || 0)" width="16" height="16" viewBox="0 0 16 16"
-            fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg (change)="checkInputsDisponobility()" (click)="onSearchCRM(this.registerForm.value['crm'] || 0)"
+            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M13.0004 6.49878C13.0004 7.93315 12.5347 9.25815 11.7504 10.3332L15.7066 14.2925C16.0972 14.6832 16.0972 15.3175 15.7066 15.7082C15.316 16.0988 14.6816 16.0988 14.291 15.7082L10.3347 11.7488C9.25974 12.5363 7.93474 12.9988 6.50037 12.9988C2.90974 12.9988 0.000366211 10.0894 0.000366211 6.49878C0.000366211 2.90815 2.90974 -0.0012207 6.50037 -0.0012207C10.091 -0.0012207 13.0004 2.90815 13.0004 6.49878ZM6.50037 10.9988C7.09131 10.9988 7.67648 10.8824 8.22244 10.6562C8.76841 10.4301 9.26448 10.0986 9.68235 9.68076C10.1002 9.2629 10.4317 8.76682 10.6578 8.22085C10.884 7.67489 11.0004 7.08973 11.0004 6.49878C11.0004 5.90783 10.884 5.32267 10.6578 4.7767C10.4317 4.23074 10.1002 3.73466 9.68235 3.3168C9.26448 2.89894 8.76841 2.56747 8.22244 2.34132C7.67648 2.11518 7.09131 1.99878 6.50037 1.99878C5.90942 1.99878 5.32426 2.11518 4.77829 2.34132C4.23233 2.56747 3.73625 2.89894 3.31839 3.3168C2.90052 3.73466 2.56905 4.23074 2.34291 4.7767C2.11676 5.32267 2.00037 5.90783 2.00037 6.49878C2.00037 7.08973 2.11676 7.67489 2.34291 8.22085C2.56905 8.76682 2.90052 9.2629 3.31839 9.68076C3.73625 10.0986 4.23233 10.4301 4.77829 10.6562C5.32426 10.8824 5.90942 10.9988 6.50037 10.9988Z"
               fill="#666666" />
@@ -33,60 +35,79 @@
 
     <div class="row">
       <div class="input-group" style="width: 100%;">
-        <label>Nome</label>
-        <input id="nome" formControlName="nome" type="text">
+        <label class="label-required">Nome</label>
+        <input id="nome" formControlName="nome" type="text" [readonly]="readonlys.nome" required>
       </div>
       <!-- <app-input ngModel name="nome" style="width: 100%;" id="nome" inputType="text" placeholder="Nome Completo" /> -->
     </div>
 
     <div class="row">
       <div class="input-group" style="width: 100%;">
-        <label>CPF</label>
-        <input mask="000.000.000-009" id="cpf" formControlName="cpf" type="text">
+        <label class="label-required">CPF</label>
+        <input mask="000.000.000-00" id="cpf" formControlName="cpf" type="text" required>
       </div>
       <!-- <app-input style="width: 100%;" id="cpf" inputType="text" placeholder="CPF" /> -->
 
       <div class="input-group" style="width: 100%;">
-        <label>Data de nascimento</label>
-        <input id="nascimento" formControlName="nascimento" type="date">
+        <label class="label-required">Data de nascimento</label>
+        <input id="nascimento" formControlName="nascimento" type="date" required>
       </div>
       <!-- <app-input style="width: 100%;" id="nascimento" inputType="date" placeholder="Data de nascimento" /> -->
     </div>
 
     <div class="row">
       <div class="input-group" style="width: 100%;">
-        <label>E-mail</label>
-        <input id="email" formControlName="email" type="email">
+        <label class="label-required">E-mail</label>
+        <input id="email" formControlName="email" type="email" required>
       </div>
       <!-- <app-input style="width: 100%;" id="email" inputType="email" placeholder="E-mail" /> -->
 
       <div class="input-group" style="width: 100%;">
-        <label>Confirma E-mail</label>
-        <input id="email" formControlName="confirma_email" type="email">
+        <label class="label-required">Confirma E-mail</label>
+        <input id="email" formControlName="confirma_email" type="email" required>
       </div>
       <!-- <app-input style="width: 100%;" id="confirma_email" inputType="email" placeholder="Confirmar E-mail" /> -->
     </div>
 
     <div class="row">
-      <div class="input-group" style="width: 100%;">
-        <label>Senha</label>
-        <input id="senha" formControlName="senha" type="password">
+      <div class="input-group group-senha" style="width: 100%;">
+        <label class="label-required">Senha</label>
+        <input id="senha" formControlName="senha" [type]="passwordInputs['senha']" required>
 
-        <svg width=" 20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg *ngIf="passwordInputs['senha']=='text'" (click)="callViewPasswordInput('senha')" width=" 20" height="16"
+          viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M1.21268 0.159551C0.887676 -0.0966993 0.415801 -0.0373243 0.159551 0.287676C-0.0966993 0.612676 -0.0373243 1.08455 0.287676 1.3408L18.7877 15.8408C19.1127 16.097 19.5846 16.0377 19.8408 15.7127C20.0971 15.3877 20.0377 14.9158 19.7127 14.6596L16.4252 12.0846C17.6627 10.8158 18.5002 9.39392 18.9221 8.38455C19.0252 8.13768 19.0252 7.86268 18.9221 7.6158C18.4564 6.50018 17.4783 4.87518 16.0158 3.51893C14.5471 2.15018 12.5252 1.00018 10.0002 1.00018C7.86893 1.00018 6.09393 1.82205 4.70955 2.90018L1.21268 0.159551ZM5.93143 3.85643C7.06268 3.0533 8.42205 2.50018 10.0002 2.50018C12.0377 2.50018 13.7127 3.42518 14.9971 4.6158C16.2002 5.73455 17.0314 7.06268 17.4564 8.00018C17.0627 8.87518 16.3127 10.0877 15.2408 11.1533L13.5596 9.83455C13.8439 9.28455 14.0033 8.66268 14.0033 8.00018C14.0033 5.7908 12.2127 4.00018 10.0033 4.00018C8.99705 4.00018 8.07518 4.37205 7.37205 4.98455L5.93143 3.85643ZM12.3408 8.88143L9.79393 6.88455C9.92518 6.61893 10.0002 6.3158 10.0002 6.00018C10.0002 5.8283 9.9783 5.65955 9.93768 5.50018C9.95955 5.50018 9.9783 5.50018 10.0002 5.50018C11.3814 5.50018 12.5002 6.61893 12.5002 8.00018C12.5002 8.30955 12.4439 8.60643 12.3408 8.88143ZM13.9439 13.9846L12.6346 12.9533C11.8377 13.2939 10.9596 13.5002 10.0002 13.5002C7.96268 13.5002 6.28768 12.5752 5.0033 11.3846C3.80018 10.2658 2.96893 8.93768 2.54393 8.00018C2.8033 7.42518 3.2158 6.7033 3.77518 5.97518L2.59705 5.04705C1.88455 5.97518 1.37518 6.90018 1.0783 7.6158C0.975176 7.86268 0.975176 8.13768 1.0783 8.38455C1.54393 9.50018 2.52205 11.1252 3.98455 12.4814C5.4533 13.8502 7.47518 15.0002 10.0002 15.0002C11.4939 15.0002 12.8096 14.5971 13.9439 13.9846ZM11.1939 11.8189L9.43768 10.4377C8.7033 10.2689 8.0908 9.77518 7.75955 9.1158L6.00643 7.73455C6.00018 7.82205 5.99705 7.90955 5.99705 8.00018C5.99705 10.2096 7.78768 12.0002 9.99705 12.0002C10.4127 12.0002 10.8127 11.9377 11.1908 11.8189H11.1939Z"
             fill="#666666" />
         </svg>
+
+        <svg *ngIf="passwordInputs['senha']=='password'" (click)="callViewPasswordInput('senha')" width="20" height="16"
+          viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M8.99922 1.5C6.96172 1.5 5.28672 2.425 4.00234 3.61562C2.79922 4.73438 1.96797 6.0625 1.54297 7C1.96797 7.9375 2.79922 9.26562 3.99922 10.3844C5.28672 11.575 6.96172 12.5 8.99922 12.5C11.0367 12.5 12.7117 11.575 13.9961 10.3844C15.1992 9.26562 16.0305 7.9375 16.4555 7C16.0305 6.0625 15.1992 4.73438 13.9992 3.61562C12.7117 2.425 11.0367 1.5 8.99922 1.5ZM2.98047 2.51875C4.45234 1.15 6.47422 0 8.99922 0C11.5242 0 13.5461 1.15 15.018 2.51875C16.4805 3.87812 17.4586 5.5 17.9242 6.61562C18.0273 6.8625 18.0273 7.1375 17.9242 7.38437C17.4586 8.5 16.4805 10.125 15.018 11.4812C13.5461 12.85 11.5242 14 8.99922 14C6.47422 14 4.45234 12.85 2.98047 11.4812C1.51797 10.125 0.539844 8.5 0.0773437 7.38437C-0.0257813 7.1375 -0.0257813 6.8625 0.0773437 6.61562C0.539844 5.5 1.51797 3.875 2.98047 2.51875ZM8.99922 9.5C10.3805 9.5 11.4992 8.38125 11.4992 7C11.4992 5.61875 10.3805 4.5 8.99922 4.5C8.97734 4.5 8.95859 4.5 8.93672 4.5C8.97734 4.65938 8.99922 4.82812 8.99922 5C8.99922 6.10313 8.10234 7 6.99922 7C6.82734 7 6.65859 6.97813 6.49922 6.9375C6.49922 6.95937 6.49922 6.97813 6.49922 7C6.49922 8.38125 7.61797 9.5 8.99922 9.5ZM8.99922 3C10.0601 3 11.0775 3.42143 11.8276 4.17157C12.5778 4.92172 12.9992 5.93913 12.9992 7C12.9992 8.06087 12.5778 9.07828 11.8276 9.82843C11.0775 10.5786 10.0601 11 8.99922 11C7.93835 11 6.92094 10.5786 6.17079 9.82843C5.42065 9.07828 4.99922 8.06087 4.99922 7C4.99922 5.93913 5.42065 4.92172 6.17079 4.17157C6.92094 3.42143 7.93835 3 8.99922 3Z"
+            fill="#666666" />
+        </svg>
+
+        <app-password-strength-bar class="forca" [passwordToCheck]="this.registerForm.value['senha'] || ''" />
       </div>
+
       <!-- <app-input style="width: 100%;" id="senha" inputType="password" placeholder="Senha" /> -->
 
-      <div class="input-group" style="width: 100%;">
-        <label>Confirmar Senha</label>
-        <input id="resenha" formControlName="resenha" type="password">
+      <div class="input-group group-senha" style="width: 100%;">
+        <label class="label-required">Confirmar Senha</label>
+        <input id="resenha" formControlName="resenha" [type]="passwordInputs['resenha']" required>
 
-        <svg width=" 20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg *ngIf="passwordInputs['resenha']=='text'" (click)="callViewPasswordInput('resenha')" width=" 20"
+          height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M1.21268 0.159551C0.887676 -0.0966993 0.415801 -0.0373243 0.159551 0.287676C-0.0966993 0.612676 -0.0373243 1.08455 0.287676 1.3408L18.7877 15.8408C19.1127 16.097 19.5846 16.0377 19.8408 15.7127C20.0971 15.3877 20.0377 14.9158 19.7127 14.6596L16.4252 12.0846C17.6627 10.8158 18.5002 9.39392 18.9221 8.38455C19.0252 8.13768 19.0252 7.86268 18.9221 7.6158C18.4564 6.50018 17.4783 4.87518 16.0158 3.51893C14.5471 2.15018 12.5252 1.00018 10.0002 1.00018C7.86893 1.00018 6.09393 1.82205 4.70955 2.90018L1.21268 0.159551ZM5.93143 3.85643C7.06268 3.0533 8.42205 2.50018 10.0002 2.50018C12.0377 2.50018 13.7127 3.42518 14.9971 4.6158C16.2002 5.73455 17.0314 7.06268 17.4564 8.00018C17.0627 8.87518 16.3127 10.0877 15.2408 11.1533L13.5596 9.83455C13.8439 9.28455 14.0033 8.66268 14.0033 8.00018C14.0033 5.7908 12.2127 4.00018 10.0033 4.00018C8.99705 4.00018 8.07518 4.37205 7.37205 4.98455L5.93143 3.85643ZM12.3408 8.88143L9.79393 6.88455C9.92518 6.61893 10.0002 6.3158 10.0002 6.00018C10.0002 5.8283 9.9783 5.65955 9.93768 5.50018C9.95955 5.50018 9.9783 5.50018 10.0002 5.50018C11.3814 5.50018 12.5002 6.61893 12.5002 8.00018C12.5002 8.30955 12.4439 8.60643 12.3408 8.88143ZM13.9439 13.9846L12.6346 12.9533C11.8377 13.2939 10.9596 13.5002 10.0002 13.5002C7.96268 13.5002 6.28768 12.5752 5.0033 11.3846C3.80018 10.2658 2.96893 8.93768 2.54393 8.00018C2.8033 7.42518 3.2158 6.7033 3.77518 5.97518L2.59705 5.04705C1.88455 5.97518 1.37518 6.90018 1.0783 7.6158C0.975176 7.86268 0.975176 8.13768 1.0783 8.38455C1.54393 9.50018 2.52205 11.1252 3.98455 12.4814C5.4533 13.8502 7.47518 15.0002 10.0002 15.0002C11.4939 15.0002 12.8096 14.5971 13.9439 13.9846ZM11.1939 11.8189L9.43768 10.4377C8.7033 10.2689 8.0908 9.77518 7.75955 9.1158L6.00643 7.73455C6.00018 7.82205 5.99705 7.90955 5.99705 8.00018C5.99705 10.2096 7.78768 12.0002 9.99705 12.0002C10.4127 12.0002 10.8127 11.9377 11.1908 11.8189H11.1939Z"
+            fill="#666666" />
+        </svg>
+
+        <svg *ngIf="passwordInputs['resenha']=='password'" (click)="callViewPasswordInput('resenha')" width="20"
+          height="16" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M8.99922 1.5C6.96172 1.5 5.28672 2.425 4.00234 3.61562C2.79922 4.73438 1.96797 6.0625 1.54297 7C1.96797 7.9375 2.79922 9.26562 3.99922 10.3844C5.28672 11.575 6.96172 12.5 8.99922 12.5C11.0367 12.5 12.7117 11.575 13.9961 10.3844C15.1992 9.26562 16.0305 7.9375 16.4555 7C16.0305 6.0625 15.1992 4.73438 13.9992 3.61562C12.7117 2.425 11.0367 1.5 8.99922 1.5ZM2.98047 2.51875C4.45234 1.15 6.47422 0 8.99922 0C11.5242 0 13.5461 1.15 15.018 2.51875C16.4805 3.87812 17.4586 5.5 17.9242 6.61562C18.0273 6.8625 18.0273 7.1375 17.9242 7.38437C17.4586 8.5 16.4805 10.125 15.018 11.4812C13.5461 12.85 11.5242 14 8.99922 14C6.47422 14 4.45234 12.85 2.98047 11.4812C1.51797 10.125 0.539844 8.5 0.0773437 7.38437C-0.0257813 7.1375 -0.0257813 6.8625 0.0773437 6.61562C0.539844 5.5 1.51797 3.875 2.98047 2.51875ZM8.99922 9.5C10.3805 9.5 11.4992 8.38125 11.4992 7C11.4992 5.61875 10.3805 4.5 8.99922 4.5C8.97734 4.5 8.95859 4.5 8.93672 4.5C8.97734 4.65938 8.99922 4.82812 8.99922 5C8.99922 6.10313 8.10234 7 6.99922 7C6.82734 7 6.65859 6.97813 6.49922 6.9375C6.49922 6.95937 6.49922 6.97813 6.49922 7C6.49922 8.38125 7.61797 9.5 8.99922 9.5ZM8.99922 3C10.0601 3 11.0775 3.42143 11.8276 4.17157C12.5778 4.92172 12.9992 5.93913 12.9992 7C12.9992 8.06087 12.5778 9.07828 11.8276 9.82843C11.0775 10.5786 10.0601 11 8.99922 11C7.93835 11 6.92094 10.5786 6.17079 9.82843C5.42065 9.07828 4.99922 8.06087 4.99922 7C4.99922 5.93913 5.42065 4.92172 6.17079 4.17157C6.92094 3.42143 7.93835 3 8.99922 3Z"
             fill="#666666" />
         </svg>
       </div>
@@ -95,7 +116,7 @@
 
     <div class="row botoes">
       <app-button type="submit" name="Cadastrar" />
-      <app-button name="Cancelar" />
+      <app-button name="Cancelar" styleType="decline" (click)="closeModal()" />
     </div>
   </form>
 </app-modal>

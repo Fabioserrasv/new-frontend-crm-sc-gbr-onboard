@@ -52,30 +52,6 @@
       flex-direction: column;
       gap: 40px;
 
-      .input-group {
-        position: relative;
-        width: 100%;
-
-        input {
-          width: 100%;
-          padding: 15px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          position: relative;
-          z-index: 1;
-        }
-
-        label {
-          position: absolute;
-          top: -10px;
-          left: 10px;
-          background-color: white;
-          padding: 0 5px;
-          font-size: 14px;
-          z-index: 2;
-        }
-      }
-
       .lembrar-div {
         display: flex;
         gap: 10px;
@@ -87,6 +63,15 @@
           font-style: normal;
           font-weight: 400;
           line-height: normal;
+        }
+      }
+
+      .senha-group {
+        svg {
+          cursor: pointer;
+
+          border-left: 1px solid black;
+          padding-left: 10px;
         }
       }
 

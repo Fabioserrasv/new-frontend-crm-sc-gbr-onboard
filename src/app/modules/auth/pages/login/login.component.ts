@@ -7,6 +7,7 @@ import { ROUTES } from '../../../../shared/utils/routes';
 import { AlertComponent } from '@ui/alert/alert/alert.component';
 import { AuthService } from '../../services/auth.service';
 import { DataSharingService } from '../../../../core/services/data-share.service';
+import { PasswordInputs, viewPasswordInput } from '../../../../shared/utils/utils';
 
 export type LoginForm = {
   email: string;
@@ -28,12 +29,23 @@ export class LoginComponent {
     senha: new FormControl('', [Validators.required, Validators.minLength(4)]),
   })
 
+  public passwordInputs: PasswordInputs = {
+    senha: "password"
+  }
+
   constructor(private _router: Router, private authService: AuthService, private dataSharingService: DataSharingService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('jwtToken')) {
-      this._router.navigateByUrl(ROUTES.FINANCE.HOME);
+    if (typeof localStorage !== 'undefined') {
+
+      if (localStorage.getItem('jwtToken')) {
+        this._router.navigateByUrl(ROUTES.FINANCE.HOME);
+      }
     }
+  }
+
+  callViewPasswordInput(input: string) {
+    this.passwordInputs = viewPasswordInput(input, this.passwordInputs);
   }
 
   openRegisterModal() {
@@ -41,7 +53,7 @@ export class LoginComponent {
   }
 
   openForgetPasswordModal() {
-    this.modalForgetPassword.openModal();
+    this.modalForgetPassword.openModal(this.alert);
   }
 
   async login() {

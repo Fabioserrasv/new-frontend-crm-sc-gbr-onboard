@@ -19,19 +19,54 @@ form {
 
   .botoes {
     justify-content: space-between;
+
+    padding-top: 20px;
   }
 
   .temcrm-group {
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    padding-left: 20px;
     align-items: center;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    padding-top: 10px;
 
     .radio-group {
       display: flex;
       flex-direction: row;
       gap: 10px;
 
-      font-size: 14px;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .group-senha {
+    svg {
+      cursor: pointer;
+
+      border-left: 1px solid black;
+      padding-left: 10px;
+
+    }
+
+    position: relative;
+
+    .forca {
+      width: 100%;
+      position: absolute;
+
+      bottom: -40px;
+      left: 0;
     }
   }
 
@@ -43,6 +78,10 @@ form {
       cursor: pointer;
     }
   }
+
+  .forca {
+    width: 50%;
+  }
 }
 
 .row {
@@ -52,4 +91,5 @@ form {
   width: 100%;
 
   gap: 20px;
+
 }

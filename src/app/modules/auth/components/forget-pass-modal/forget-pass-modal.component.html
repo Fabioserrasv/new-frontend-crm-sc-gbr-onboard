@@ -1,14 +1,14 @@
 <app-modal title="Recuperar senha">
-  <form #modalBody action="">
+  <form #modalBody [formGroup]="forgetPassForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="input-group" style="width: 100%;">
-        <label>CPF</label>
-        <input mask="000.000.000-009" [(ngModel)]="cpf" id="cpf" name="cpf" type="text">
+        <label class="label-required">CPF</label>
+        <input mask="000.000.000-009" formControlName="cpf" id="cpf" name="cpf" type="text">
       </div>
 
       <div class="input-group" style="width: 100%;">
-        <label>Data de nascimento</label>
-        <input [(ngModel)]="nascimento" id="nascimento" name="nascimento" type="date">
+        <label class="label-required">Data de nascimento</label>
+        <input formControlName="nascimento" id="nascimento" name="nascimento" type="date">
       </div>
       <!-- <app-input style="width: 100%;" id="cpf" inputType="text" placeholder="CPF" /> -->
       <!-- <app-input style="width: 100%;" id="nascimento" inputType="date" placeholder="Data de nascimento" /> -->
@@ -16,15 +16,15 @@
 
     <div class="row">
       <div class="input-group" style="width: 100%;">
-        <label>E-mail</label>
-        <input [(ngModel)]="email" id="email" name="email" type="email">
+        <label class="label-required">E-mail</label>
+        <input formControlName="email" id="email" name="email" type="email">
       </div>
       <!-- <app-input style="width: 100%;" id="email" inputType="email" placeholder="E-mail de cadastro" /> -->
     </div>
 
     <div class="row botoes">
-      <app-button name="Recuperar senha" />
-      <app-button name="Cancelar" />
+      <app-button type="submit" name="Recuperar senha" />
+      <app-button name="Cancelar" styleType="decline" (click)="closeModal()" />
     </div>
   </form>
 </app-modal>

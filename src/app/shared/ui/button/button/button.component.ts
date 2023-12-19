@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 type ButtonType = "button" | "menu" | "reset" | "submit"
+type StyleType = "normal" | "decline"
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
@@ -10,5 +11,5 @@ export class ButtonComponent {
   @Input() type: ButtonType = "button";
   @Input() customStyles: any = {};
   @Input() svgLogin: boolean = false
-
+  @Input() styleType: StyleType = "normal"
 }

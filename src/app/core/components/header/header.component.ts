@@ -36,22 +36,29 @@ export class HeaderComponent {
       this.signed = value;
 
       if (this.signed) {
-        const token = localStorage.getItem("jwtToken");
+        if (typeof localStorage !== 'undefined') {
+          const token = localStorage.getItem("jwtToken");
 
-        if (token) {
-          this.user = getUserFromToken(token);
-          this.username = this.user.nome;
-          this.crm = this.user.crm;
+          if (token) {
+            this.user = getUserFromToken(token);
+            this.username = this.user.nome;
+            this.crm = this.user.crm;
+          }
+
         }
       }
     });
   }
 
   ngOnInit() {
-    const token = localStorage.getItem("jwtToken");
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem("jwtToken");
 
-    if (token) {
-      this.dataSharingService.signed.next(true);
+      if (token) {
+        this.dataSharingService.signed.next(true);
+      } else {
+        this.dataSharingService.signed.next(false);
+      }
     } else {
       this.dataSharingService.signed.next(false);
     }
