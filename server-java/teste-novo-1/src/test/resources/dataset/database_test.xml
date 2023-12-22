@@ -1,0 +1,9 @@
+<dataset>
+	<public.medico id="1" nome="Teste Junit 1"
+		cpf="56889769007" crm="1111" email="junit1@teste.com" senha="1111"
+		datanascimento="00-00-0001" />
+
+	<public.medico id="2" nome="Teste Junit 2"
+		cpf="18621626039" crm="2222" email="junit2@teste.com" senha="2222"
+		datanascimento="00-00-0002" />
+</dataset>
