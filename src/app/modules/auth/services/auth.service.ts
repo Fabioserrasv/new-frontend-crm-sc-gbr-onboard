@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { RegisterForm } from '../components/register-modal/register-modal.component';
 import { lastValueFrom } from 'rxjs';
@@ -6,6 +6,7 @@ import { LoginForm } from '../pages/login/login.component';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { User } from '../../../core/entities/User';
+import { API_URL } from '../../../config/env';
 
 type ServerRegisterForm = {
   nome: string;
@@ -41,7 +42,6 @@ type ServerLoginResponse = {
 })
 export class AuthService {
 
-  private API_URL = 'http://localhost:8000';
 
   constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: any) { }
 
@@ -66,9 +66,11 @@ export class AuthService {
   async register(data: RegisterForm): Promise<boolean> {
     const dataUser = this.convertRegisterFormToServerRegisterForm(data);
     try {
-      const response: any = await lastValueFrom(this.httpClient.post<any>(this.API_URL + '/users/create', dataUser));
+      const response: any = await lastValueFrom(this.httpClient.post<any>(API_URL + '/user', dataUser));
 
-      if (response.message === 'ok.') {
+      console.log(response);
+
+      if (response > 0) {
         return true;
       }
 
@@ -82,12 +84,21 @@ export class AuthService {
     try {
       let serverDataLogin = this.convertLoginFormToServerLoginForm(dataLogin);
 
-      const response: ServerLoginResponse = await lastValueFrom(
-        this.httpClient.post<ServerLoginResponse>(this.API_URL + '/auth/login', serverDataLogin)
+      const httpOptions = {
+        headers: new HttpHeaders({
+
+        }),
+      };
+
+      const response = await lastValueFrom(
+        this.httpClient.post<ServerLoginResponse>(API_URL + '/auth/login', serverDataLogin, { observe: "response" })
       );
 
-      if (response && response.id != "0") {
-        localStorage.setItem("jwtToken", response.token)
+      let user: ServerLoginResponse = response.body!;
+      let token = response.headers.get('x-token');
+
+      if (user && token && user.id != "0") {
+        localStorage.setItem("jwtToken", token)
         return true;
       }
 

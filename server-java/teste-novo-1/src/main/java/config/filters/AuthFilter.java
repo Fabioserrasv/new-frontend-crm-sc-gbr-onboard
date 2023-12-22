@@ -22,7 +22,8 @@ import repository.JwtRepository;
 public class AuthFilter implements Filter {
 
   private static final String URI_LOGIN = "/teste-novo-1/api/auth/login";
-
+  private static final String URI_REGISTER = "/teste-novo-1/api/user";
+  
   private static final String AUTH_HEADER = "Authorization";
   private static final String AUTH_HEADER_PREFIX = "Bearer ";
 
@@ -38,8 +39,7 @@ public class AuthFilter implements Filter {
 
     System.out.println(req.getRequestURI());
 
-    if (!URI_LOGIN.equalsIgnoreCase(req.getRequestURI())) {
-      System.out.println("entro");
+    if (!URI_LOGIN.equalsIgnoreCase(req.getRequestURI()) && !URI_REGISTER.equalsIgnoreCase(req.getRequestURI())) {
       User user = null;
       String jwtHeader = req.getHeader(AUTH_HEADER);
 

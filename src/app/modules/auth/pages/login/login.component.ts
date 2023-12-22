@@ -3,7 +3,7 @@ import { RegisterModalComponent } from '../../components/register-modal/register
 import { ForgetPassModalComponent } from '../../components/forget-pass-modal/forget-pass-modal.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ROUTES } from '../../../../shared/utils/routes';
+import { ROUTES } from '../../../../config/routes';
 import { AlertComponent } from '@ui/alert/alert/alert.component';
 import { AuthService } from '../../services/auth.service';
 import { DataSharingService } from '../../../../core/services/data-share.service';
@@ -26,7 +26,7 @@ export class LoginComponent {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    senha: new FormControl('', [Validators.required]),
   })
 
   public passwordInputs: PasswordInputs = {
@@ -57,7 +57,10 @@ export class LoginComponent {
   }
 
   async login() {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.alert.alert('Preencha os dados corretamente', 'danger');
+      return;
+    };
 
     if (await this.authService.login(this.loginForm.value as LoginForm)) {
       this.dataSharingService.signed.next(true);

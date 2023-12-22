@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - ./gbr_onboard.sql:/docker-entrypoint-initdb.d/gbr_onboard.sql
+    environment:
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"

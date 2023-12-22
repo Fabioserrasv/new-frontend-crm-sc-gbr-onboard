@@ -23,6 +23,7 @@ public class UserRepository extends AbstractCrudRepository<User> {
 					.getSingleResult();
 			return user;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}

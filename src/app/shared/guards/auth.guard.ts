@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { ROUTES } from '../utils/routes';
+import { ROUTES } from '../../config/routes';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('jwtToken');

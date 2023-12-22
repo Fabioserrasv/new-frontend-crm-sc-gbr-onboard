@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import { User } from '../../../../core/entities/User';
 import { getUserFromToken } from '../../../../shared/utils/utils';
 import { Router } from '@angular/router';
-import { ROUTES } from '../../../../shared/utils/routes';
+import { ROUTES } from '../../../../config/routes';
 import { HeaderComponent } from '../../../../core/components/header/header.component';
 import { DataSharingService } from '../../../../core/services/data-share.service';
 
