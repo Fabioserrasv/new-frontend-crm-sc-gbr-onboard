@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from './components/button/button.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LeftNavbarComponent } from './components/left-navbar/left-navbar.component';
+import { SwitchInputModule } from '@ui';
 
 @NgModule({
-  declarations: [ButtonComponent, HeaderComponent],
-  exports: [ButtonComponent, HeaderComponent],
+  declarations: [HeaderComponent, LeftNavbarComponent],
+  exports: [HeaderComponent, LeftNavbarComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SwitchInputModule
   ]
 })
 

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataSharingService } from './core/services/data-share.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,13 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'new-frontend-crm-sc-gbr-onboard';
+  title = 'Espaço Médico CRM-SC';
+
+  public signed: boolean = false;
+
+  constructor(private router: Router, private dataSharingService: DataSharingService) {
+    this.dataSharingService.signed.subscribe(value => {
+      this.signed = value;
+    });
+  }
 }

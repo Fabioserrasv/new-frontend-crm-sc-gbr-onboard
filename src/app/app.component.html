@@ -1,4 +1,7 @@
-<app-header></app-header>
-<div class="page">
-  <router-outlet></router-outlet>
+<app-header />
+<div class="page" [ngClass]="{'logged': signed}">
+  <app-left-navbar class="navbar-component" />
+  <div class="page-content">
+    <router-outlet />
+  </div>
 </div>

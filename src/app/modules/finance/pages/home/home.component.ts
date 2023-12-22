@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostBinding, ViewChild } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { User } from '../../../../core/entities/User';
 import { getUserFromToken } from '../../../../shared/utils/utils';
@@ -10,9 +10,13 @@ import { DataSharingService } from '../../../../core/services/data-share.service
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  // host: {
+  //   class: 'page-content'
+  // }
 })
 export class HomeComponent {
+  // @HostBinding('style') style = 'grid-area:content;';
   public username: string
   private user: User
 
